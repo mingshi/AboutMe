@@ -29,7 +29,8 @@ attribute = {
 * 2009.10 ~ 2011.11 上海傲途信息技术有限公司    部门主管    (创业公司，后期运营失败)
 * 2011.11 ~ 2013.05 安居客(系统开发)            高级架构师
 * 2013.05 ~ 2014.04 互众广告(上海)有限公司      code monkey (没有归属感)
-* 2014.04 ~ 至今    美美豆                      code monkey
+* 2014.04 ~ 2014.10 美美豆                      ios code monkey
+* 2014.10 ~ 至今    小区阿福                    技术负责人
 
 ##项目 OR 经验
 ```python
@@ -42,7 +43,7 @@ for i in range (1, 100+)
     return "Oh My God"
 ```
 
-Now For IOS with Object C
+Now For IOS with Object C && Android
 
 ## Features
 * 有孚
