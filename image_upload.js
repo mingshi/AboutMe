@@ -5,17 +5,14 @@
  * @version 2016/03/18
  */
 
-
-
 var imgHeight = $('.uploading .upImg-out img').width();
 $('.input-file').height(imgHeight);
 $('.input-file').width(imgHeight);
 $('.upImg-out a').height(imgHeight);
-
 var IMGUP = {
-    file_opt_count: 0,
-    file_upload_count: 0,
-    file_error_count: 0,
+    file_opt_count: 0,//总的文件添加次数
+    file_upload_count: 0,//需要上传的文件数
+    file_error_count: 0,//上传失败的文件数
     file_error_list: [],
     file_md5_list: [],
     init: function(element, btn_element, preview_element) {
@@ -28,11 +25,13 @@ var IMGUP = {
                         var dvPreview = $("#" + preview_element);
                         var regex = /^.*(.jpg|.jpeg|.gif|.png|.bmp)$/;
                         $.each(data.files, function (index, file) {
+                            alert(data.files);
                             if (file.type.match(regex)) {
                                 var reader = new FileReader();
                                 reader.onload = function (e) {
                                     _this.file_opt_count++;
                                     _this.file_upload_count++;
+                                    var md5 = _this.file_opt_count;
                                     /*var html = '<a href="' + e.target.result + '" class="uploadImg">';
                                     html += '<div class="imgOut"><img  src="' + e.target.result + '"/></div>';
                                     html += '<span name="img" class="delImg" id="upload_img_' + file_opt_count + '">';
@@ -42,17 +41,17 @@ var IMGUP = {
                                     html+='<a href="'+ e.target.result +'" class="uploadImg swipebox">';
                                     html+='<img id="img" src="'+ e.target.result+'"/>';
                                     html+='</a>';
-                                    html+='<span class="delImg" id="upload_img_' + _this.file_opt_count + '">';
+                                    html+='<span class="delImg" id="upload_img_' + md5 + '">';
                                     html+='</span>';
                                     html+='</div>';
                                     dvPreview.append(html);
-                                    file.img_id = 'upload_img_' + _this.file_opt_count;
+                                    file.img_id = 'upload_img_' + md5 ;
                                     var listL = $('#' + preview_element).find('a').size();
                                     //删除图片
-                                    $('#upload_img_' + _this.file_opt_count + '').click(function () {
+                                    $('#upload_img_' + md5 + '').click(function () {
                                         //如果之前提交到服务器了,需要删除md5
-                                        if (typeof(file.img_id) != undefined) {
-                                            if (typeof(_this.file_md5_list[file.img_id]) != undefined) {
+                                        if (typeof(file.img_id) != "undefined") {
+                                            if (typeof(_this.file_md5_list[file.img_id]) != "undefined") {
                                                 delete(_this.file_md5_list[file.img_id]);
                                             }
                                         }
@@ -84,7 +83,7 @@ var IMGUP = {
                     var btn_element_list = btn_element.split(',');
                     for (index in btn_element_list) {
                         $('#' + btn_element_list[index]).on('click', function (e) {
-                            if (data.files.length > 0) {
+                            if (data.files.length > 0 && typeof(data.files[0].is_uploaded) == "undefined") {
                                 data.submit();
                             }
                         })
@@ -99,8 +98,10 @@ var IMGUP = {
                             var img = imglist[key];
                             for (var imgkey in img) {
                                 if (img[imgkey].error == 0) {
-                                    if (typeof(data.files[0].img_id) != undefined) {
+                                    if (typeof(data.files[0].img_id) != "undefined") {
                                         _this.file_md5_list[data.files[0].img_id] = img[imgkey].md5;
+                                        data.files[0].is_uploaded = 1;
+                                        _this.file_upload_count--;
                                     }
                                 }
                             }
@@ -109,7 +110,7 @@ var IMGUP = {
                 },
                 fail: function(e, data) {
                     $.each(data.files, function (index, file) {
-                        if (typeof(file.img_id) != undefined && !(file.img_id  in _this.file_error_list)) {
+                        if (typeof(file.img_id) != "undefined" && !(file.img_id  in _this.file_error_list)) {
                             _this.file_error_count++;
                             _this.file_error_list[file.img_id] =file.img_id;
                         }
