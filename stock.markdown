@@ -71,9 +71,9 @@ mean(B);
 </pre>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     - 对数收益率均值
-``` python
+<pre>
 mean(Ds); %直接用mean函数对上面得到的对数收益率进行均值计算
-```
+</pre>
 
 * 波动率
 ``` python
