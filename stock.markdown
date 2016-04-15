@@ -64,11 +64,11 @@ plot(Ds);
 * 均值
 
     - 样本均值
-``` python
+<pre>
 用mean函数直接计算均值
 mean(B);
 得出结果: 3.7216e+03 = 3721.6;
-```
+</pre>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     - 对数收益率均值
 ``` python
