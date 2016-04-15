@@ -25,3 +25,38 @@ function SPaths=AssetPath(S0,mu,sigma,T,NSteps,NRepl) %定义function
 ####最终得到图片如下：
 ![股票随机样本路径](https://raw.githubusercontent.com/mingshi/AboutMe/master/stock1.png)
 
+##第二题:用matlab或者R软件，使用上证指数一年日数据，计算对数收益率，均值，波动率
+<pre>
+用xlsread读取excel的第五列的第三行到第246行，存放到矩阵B中（使用收盘价）
+</pre>
+``` python
+B=xlsread('F:\金融数学\111.xlsx',1,'E3:E246') 
+```
+* 对数收益率
+``` python
+%将日指数转化为日收益率
+log_ret=price2ret(B)
+%再生成图像
+plot(log_ret)
+```
+####最终得到图片如下：
+![对数收益率](https://raw.githubusercontent.com/mingshi/AboutMe/master/stock2.png)
+
+<pre>
+还有另外一种对数收益率的计算方式，循环将每日的对数收益率计算出来, 如下：
+</pre>
+
+``` python
+%样本的天数一共为244天
+n=244;
+%循环从2开始，因为要拿第二天的对比第一天的数据
+for i=2:244;
+    Ds(i)=log(B(i)/B(i-1));
+    i=i+1;
+end;
+%Ds便是对数收益率的矩阵
+plot(Ds);
+```
+<pre>
+经测试，这种方法画出来的图和上面一种一致
+</pre>
