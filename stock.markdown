@@ -16,9 +16,12 @@ function SPaths=AssetPath(S0,mu,sigma,T,NSteps,NRepl) %定义function
 
 ``` python
 %HtPath.m
-randn('seed',0);%获得随机种子
-paths=AssetPath(1,0.05,0.5,1,365,100); %调用方法
-plot(1:length(paths),paths) %画出100条线
-xlabel('时间')
-ylabel('股票价格')
+    randn('seed',0);%获得随机种子
+    paths=AssetPath(1,0.05,0.5,1,365,100); %调用方法
+    plot(1:length(paths),paths) %画出100条线
+    xlabel('时间')
+    ylabel('股票价格')
 ```
+####最终得到图片如下：
+![股票随机样本路径](https://raw.githubusercontent.com/mingshi/AboutMe/master/stock1.png)
+
